@@ -17,9 +17,12 @@ namespace BookMyShowApp
         public DbSet<Booking> Booking { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-L01MDJK\SQLEXPRESS;Database=TicketBook;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-L01MDJK\SQLEXPRESS;Database=BookMyShowDatabase;Trusted_Connection=True;");
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
 
+        }
     }
 }

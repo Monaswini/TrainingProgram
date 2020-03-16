@@ -2,6 +2,7 @@
 {
     class TheatreSeatInfo
     {
+        public int ID { get; set; }
         public SeatType SeatType { get; set; }
         public int NumberOfSeats { get; set; }
         public int Price { get; set; }

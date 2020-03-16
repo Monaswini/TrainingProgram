@@ -7,7 +7,7 @@ namespace BookMyShowApp
         public int ID { get; set; }
         public string Name { get; set; }
         public List<Seat> Seats { get; set; }
-        public TheatreSeatInfo TheatreSeatInfo { get; set; }
+        public List<TheatreSeatInfo> TheatreSeatInfo { get; set; }
         public List<Booking> Bookings { get; set; }
         public Address Address { get; set; }
     }
