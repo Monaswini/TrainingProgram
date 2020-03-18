@@ -15,6 +15,7 @@ namespace BookMyShowApp
         public DbSet<Seat> Seat { get; set; }
         public DbSet<Genre> Genre { get; set; }
         public DbSet<Booking> Booking { get; set; }
+        public DbSet<MovieTheatreInfo> MovieTheatreInfo { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-L01MDJK\SQLEXPRESS;Database=BookMyShowDatabase;Trusted_Connection=True;");

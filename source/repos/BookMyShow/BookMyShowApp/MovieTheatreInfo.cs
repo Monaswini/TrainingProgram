@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BookMyShowApp
 {
-    class Movie_Theatre_Info
+    class MovieTheatreInfo
     {
         public int ID { get; set; }
         public int MovieId { get; set; }

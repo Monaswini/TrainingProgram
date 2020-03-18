@@ -7,6 +7,6 @@ namespace BookMyShowApp
         public int ID { get; set; }
         public string Name { get; set; }
         public Genre Genre { get; set; }
-        public List<Movie_Theatre_Info> Movie_Theatre_Info { get; set; }
+        public List<MovieTheatreInfo> MovieTheatreInfo { get; set; }
     }
 }
