@@ -6,29 +6,24 @@ using System.Text;
 
 namespace BookMyShowApp
 {
-    class DataBaseOperation
+    class AdminRole
     {
         public void AdminDBOperation()
         {
             Console.WriteLine("What operation you want to perform");
             Console.WriteLine("1. To add Movie");
-            Console.WriteLine("2. To Remove Movie");
-            Console.WriteLine("3. To See Movie the running in theatres");
+            Console.WriteLine("2. To remove Movie");
+            Console.WriteLine("3. To see the movies running in theatres");
             Console.WriteLine("4. To change the price of the Ticket");
             var choosenOption = Console.ReadLine();
 
             using (BookMyShowContext context = new BookMyShowContext())
             {
-                Movie movie = new Movie();
                 switch (choosenOption)
                 {
                     case "1":
                         {
-                            var result = AddMovie(context, movie);
-                            if (result)
-                                Console.WriteLine("Movie added");
-                            else
-                                Console.WriteLine("Movie did not added.Try again..");
+                            AddMovie(context);
                             break;
                         }
                     case "2":
@@ -44,15 +39,13 @@ namespace BookMyShowApp
                 }
             }
         }
-
         private void ShowMoviesInTheatres(BookMyShowContext context)
         {
             var movieTheatreInfo = context.MovieTheatreInfo.Include(m => m.Movie)
                 .Include(x => x.Theatre).ToList();
-            foreach(var m in movieTheatreInfo)
-                Console.WriteLine(m.Movie.Name+" : "+m.Theatre.Name);
+            foreach (var m in movieTheatreInfo)
+                Console.WriteLine(m.Movie.Name + " : " + m.Theatre.Name);
         }
-
         private void RemoveMovie(BookMyShowContext context)
         {
             Console.WriteLine("Enter the movie name you want to remove");
@@ -91,9 +84,9 @@ namespace BookMyShowApp
             context.SaveChanges();
             Console.WriteLine("Movie removed");
         }
-
-        private bool AddMovie(BookMyShowContext context, Movie movie)
+        private void AddMovie(BookMyShowContext context)
         {
+            Movie movie = new Movie();
             Console.WriteLine("Select Genre for your movie");
             var genres = context.Genre.ToList();
             //for (var i = 0; i < genres.Count; i++)
@@ -112,7 +105,7 @@ namespace BookMyShowApp
             if (genre == null)
             {
                 Console.WriteLine("Select correct Genre.");
-                return false;
+                return;
             }
 
 
@@ -126,7 +119,7 @@ namespace BookMyShowApp
             if (noOfTheatre > context.Theatre.Count())
             {
                 Console.WriteLine("Exceeds maximum. Try again..");
-                return false;
+                return;
             }
 
             Console.WriteLine("Select the Theater");
@@ -146,9 +139,8 @@ namespace BookMyShowApp
 
             context.Movie.Add(movie);
             context.SaveChanges();
-            return true;
+           // return true;
         }
-
         private List<Theatre> ChoosenTheatres(List<Theatre> theatres, int noOfTheatre)
         {
             for (var i = 1; i <= theatres.Count; i++)
@@ -187,14 +179,6 @@ namespace BookMyShowApp
                 j++;
             }
             return list;
-        }
-
-        public void UserDBOperation()
-        {
-            using (BookMyShowContext context = new BookMyShowContext())
-            {
-
-            }
         }
     }
 }
