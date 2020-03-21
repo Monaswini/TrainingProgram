@@ -48,11 +48,31 @@ namespace BookMyShowApp
         private void ChangeTicketPrice(BookMyShowContext context)
         {
             Console.WriteLine("Enter the theatre for which you want to change the price of the ticket from the below list of theatres");
-            //var theatreList = context.Theatre.Include(x=>x.TheatreSeatInfos).ToList();
-            //theatreList.ForEach(x => Console.WriteLine(x.ID + " : " + x.Name ));
-            var abc = context.TheatreSeatInfo.Include(x => x.SeatType).ToList();
-            foreach(var wsx in abc)
-                Console.WriteLine(wsx.Theatre.Name+" "+wsx.SeatType.Type);
+            var theatreSeatinfos = context.TheatreSeatInfo.Include(t=>t.Theatre).Include(s=>s.SeatType).ToList();
+            
+            foreach(var t in theatreSeatinfos)
+                Console.WriteLine(t.Theatre.Name+" "+t.SeatType.Type +" "+t.Price);
+            var theatreName = Console.ReadLine();
+           
+            if(context.Theatre.FirstOrDefault(x => x.Name.Equals(theatreName))==null)
+            {
+                Console.WriteLine("Theatre is not present");
+                return;
+            }
+
+            Console.WriteLine("Enter the type of seat of the theatre {0} for which you wnt to change the price", theatreName);
+            var seatType = Console.ReadLine();
+
+            if(context.SeatType.FirstOrDefault(x => x.Type.Equals(seatType)) == null)
+            {
+                Console.WriteLine("SeatType is not present");
+                return;
+            }
+            Console.WriteLine("Enter the change price");
+            var changedPrice = Convert.ToInt32(Console.ReadLine());
+            var info = theatreSeatinfos.First(s => s.SeatType.Type == seatType && s.Theatre.Name== theatreName);
+            info.Price = changedPrice;
+            context.SaveChanges();
         }
 
         private void ShowMoviesInTheatres(BookMyShowContext context)
