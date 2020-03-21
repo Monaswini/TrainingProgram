@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BookMyShowApp
 {
@@ -11,6 +12,8 @@ namespace BookMyShowApp
         public int MovieId { get; set; }
         public DateTime BookingDate { get; set; }
         public ShowTime ShowTime { get; set; }
-        public float TotalPrice { get; set; }
+        public List<BookedSeatDetail> BookedSeatList { get; set; }
+        public int NumberOfBookedSeat { get; set; }
+        public double TotalBookingPrice { get; set; }
     }
 }

@@ -23,22 +23,38 @@ namespace BookMyShowApp
                 {
                     case "1":
                         {
-                            AddMovie(context);
+                            //AddMovie(context);
                             break;
                         }
                     case "2":
                         {
-                            RemoveMovie(context);
+                            //RemoveMovie(context);
                             break;
                         }
                     case "3":
                         {
-                            ShowMoviesInTheatres(context);
+                            //ShowMoviesInTheatres(context);
+                            break;
+                        }
+                    case "4":
+                        {
+                            ChangeTicketPrice(context);
                             break;
                         }
                 }
             }
         }
+
+        private void ChangeTicketPrice(BookMyShowContext context)
+        {
+            Console.WriteLine("Enter the theatre for which you want to change the price of the ticket from the below list of theatres");
+            //var theatreList = context.Theatre.Include(x=>x.TheatreSeatInfos).ToList();
+            //theatreList.ForEach(x => Console.WriteLine(x.ID + " : " + x.Name ));
+            var abc = context.TheatreSeatInfo.Include(x => x.SeatType).ToList();
+            foreach(var wsx in abc)
+                Console.WriteLine(wsx.Theatre.Name+" "+wsx.SeatType.Type);
+        }
+
         private void ShowMoviesInTheatres(BookMyShowContext context)
         {
             var movieTheatreInfo = context.MovieTheatreInfo.Include(m => m.Movie)

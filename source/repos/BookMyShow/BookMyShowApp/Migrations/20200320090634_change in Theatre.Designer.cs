@@ -4,14 +4,16 @@ using BookMyShowApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookMyShowApp.Migrations
 {
     [DbContext(typeof(BookMyShowContext))]
-    partial class BookMyShowContextModelSnapshot : ModelSnapshot
+    [Migration("20200320090634_change in Theatre")]
+    partial class changeinTheatre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,7 +210,10 @@ namespace BookMyShowApp.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("SeatTypeId")
+                    b.Property<int?>("SeatTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShowTime")
                         .HasColumnType("int");
 
                     b.Property<int>("TheatreId")
@@ -216,69 +221,11 @@ namespace BookMyShowApp.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SeatTypeId");
+                    b.HasIndex("SeatTypeID");
 
                     b.HasIndex("TheatreId");
 
                     b.ToTable("TheatreSeatInfo");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            NumberOfSeats = 20,
-                            Price = 40,
-                            SeatTypeId = 1,
-                            TheatreId = 1
-                        },
-                        new
-                        {
-                            ID = 2,
-                            NumberOfSeats = 30,
-                            Price = 60,
-                            SeatTypeId = 2,
-                            TheatreId = 1
-                        },
-                        new
-                        {
-                            ID = 3,
-                            NumberOfSeats = 50,
-                            Price = 50,
-                            SeatTypeId = 1,
-                            TheatreId = 2
-                        },
-                        new
-                        {
-                            ID = 4,
-                            NumberOfSeats = 50,
-                            Price = 70,
-                            SeatTypeId = 2,
-                            TheatreId = 2
-                        },
-                        new
-                        {
-                            ID = 5,
-                            NumberOfSeats = 60,
-                            Price = 45,
-                            SeatTypeId = 1,
-                            TheatreId = 3
-                        },
-                        new
-                        {
-                            ID = 6,
-                            NumberOfSeats = 70,
-                            Price = 75,
-                            SeatTypeId = 2,
-                            TheatreId = 3
-                        },
-                        new
-                        {
-                            ID = 7,
-                            NumberOfSeats = 100,
-                            Price = 120,
-                            SeatTypeId = 2,
-                            TheatreId = 4
-                        });
                 });
 
             modelBuilder.Entity("BookMyShowApp.User", b =>
@@ -379,9 +326,7 @@ namespace BookMyShowApp.Migrations
                 {
                     b.HasOne("BookMyShowApp.SeatType", "SeatType")
                         .WithMany()
-                        .HasForeignKey("SeatTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SeatTypeID");
 
                     b.HasOne("BookMyShowApp.Theatre", "Theatre")
                         .WithMany("TheatreSeatInfos")

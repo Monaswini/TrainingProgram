@@ -4,14 +4,16 @@ using BookMyShowApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookMyShowApp.Migrations
 {
     [DbContext(typeof(BookMyShowContext))]
-    partial class BookMyShowContextModelSnapshot : ModelSnapshot
+    [Migration("20200320125640_initial seeding for ShowTime and TheatreSeatInfo")]
+    partial class initialseedingforShowTimeandTheatreSeatInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,7 +89,7 @@ namespace BookMyShowApp.Migrations
                     b.Property<int>("NumberOfBookedSeat")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShowTime")
+                    b.Property<int?>("ShowTimeID")
                         .HasColumnType("int");
 
                     b.Property<int>("TheatreId")
@@ -100,6 +102,8 @@ namespace BookMyShowApp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ShowTimeID");
 
                     b.HasIndex("TheatreId");
 
@@ -178,6 +182,48 @@ namespace BookMyShowApp.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("SeatType");
+                });
+
+            modelBuilder.Entity("BookMyShowApp.ShowTime", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("TheatreID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("TheatreID");
+
+                    b.ToTable("ShowTime");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Time = "morning"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Time = "afternoon"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Time = "evening"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Time = "night"
+                        });
                 });
 
             modelBuilder.Entity("BookMyShowApp.Theatre", b =>
@@ -274,7 +320,7 @@ namespace BookMyShowApp.Migrations
                         new
                         {
                             ID = 7,
-                            NumberOfSeats = 100,
+                            NumberOfSeats = 0,
                             Price = 120,
                             SeatTypeId = 2,
                             TheatreId = 4
@@ -340,6 +386,10 @@ namespace BookMyShowApp.Migrations
 
             modelBuilder.Entity("BookMyShowApp.Booking", b =>
                 {
+                    b.HasOne("BookMyShowApp.ShowTime", "ShowTime")
+                        .WithMany()
+                        .HasForeignKey("ShowTimeID");
+
                     b.HasOne("BookMyShowApp.Theatre", "Theatre")
                         .WithMany()
                         .HasForeignKey("TheatreId")
@@ -373,6 +423,13 @@ namespace BookMyShowApp.Migrations
                         .HasForeignKey("TheatreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BookMyShowApp.ShowTime", b =>
+                {
+                    b.HasOne("BookMyShowApp.Theatre", null)
+                        .WithMany("ShowTime")
+                        .HasForeignKey("TheatreID");
                 });
 
             modelBuilder.Entity("BookMyShowApp.TheatreSeatInfo", b =>
