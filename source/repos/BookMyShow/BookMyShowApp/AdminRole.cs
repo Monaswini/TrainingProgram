@@ -23,17 +23,17 @@ namespace BookMyShowApp
                 {
                     case "1":
                         {
-                            //AddMovie(context);
+                            AddMovie(context);
                             break;
                         }
                     case "2":
                         {
-                            //RemoveMovie(context);
+                            RemoveMovie(context);
                             break;
                         }
                     case "3":
                         {
-                            //ShowMoviesInTheatres(context);
+                            ShowMoviesInTheatres(context);
                             break;
                         }
                     case "4":
@@ -95,30 +95,31 @@ namespace BookMyShowApp
                 return;
             }
 
-            //var movieTheatreInfo = context.Movie.Include(mt => mt.MovieTheatreInfo)
-            //    .ThenInclude(x => x.Theatre)
-            //    .First(x => x.ID == movieTobeDeleted.ID);
+            var movieTheatreInfo = context.Movie.Include(mt => mt.MovieTheatreInfo)
+                .ThenInclude(x => x.Theatre)
+                .First(x => x.ID == movieTobeDeleted.ID);
 
-            //var movieInTheatre = movieTheatreInfo.MovieTheatreInfo; //getting the list of theatres where the movie is running
+            var movieInTheatre = movieTheatreInfo.MovieTheatreInfo; //getting the list of theatres where the movie is running
 
-            //foreach (var m in movieInTheatre)
-            //    Console.WriteLine(m.Theatre.ID + " : " + m.Theatre.Name);
+            foreach (var m in movieInTheatre)
+                Console.WriteLine(m.Theatre.ID + " : " + m.Theatre.Name);
 
-            //var count = 0;
-            //while (count <= movieInTheatre.Count)
-            //{
-            //    Console.WriteLine("Select the theatres from where you want to remove the movie " + selectedMovie);
-            //    var selectedTheatreId = Convert.ToInt32(Console.ReadLine());
+            var count = 0;
+            while (count <= movieInTheatre.Count)
+            {
+                Console.WriteLine("Select the theatres from where you want to remove the movie " + selectedMovie);
+                var selectedTheatreId = Convert.ToInt32(Console.ReadLine());
 
-            //}
-            //var t = context.Theatre.Select(x => x.ID);
-            //var t1 = context.Theatre.Where(x => x.ID == 2);
-            //var t2 = context.Theatre.FirstOrDefault(x => x.ID == 2);
+                //}
+                //var t = context.Theatre.Select(x => x.ID);
+                //var t1 = context.Theatre.Where(x => x.ID == 2);
+                //var t2 = context.Theatre.FirstOrDefault(x => x.ID == 2);
 
 
-            context.Movie.Remove(movieTobeDeleted);
-            context.SaveChanges();
-            Console.WriteLine("Movie removed");
+                context.Movie.Remove(movieTobeDeleted);
+                context.SaveChanges();
+                Console.WriteLine("Movie removed");
+            }
         }
         private void AddMovie(BookMyShowContext context)
         {

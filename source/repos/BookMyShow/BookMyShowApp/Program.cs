@@ -12,7 +12,13 @@ namespace BookMyShowApp
             var role = Console.ReadLine();
             if (role == "1")
                 new AdminRole().AdminDBOperation();
+            else if(role=="2")
             new UserRole().UserDBOperation();
+            else
+            {
+                Console.WriteLine("Invalid");
+                return;
+            }
         }
     }
 }

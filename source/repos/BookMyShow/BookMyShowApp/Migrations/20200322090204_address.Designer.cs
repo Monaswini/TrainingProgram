@@ -4,14 +4,16 @@ using BookMyShowApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookMyShowApp.Migrations
 {
     [DbContext(typeof(BookMyShowContext))]
-    partial class BookMyShowContextModelSnapshot : ModelSnapshot
+    [Migration("20200322090204_address")]
+    partial class address
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
