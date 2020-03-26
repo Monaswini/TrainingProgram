@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BookMyShowApp
+namespace BookMyShow.Application
 {
-    class Booking
+    public class Booking
     {
         public int ID { get; set; }
         public int UserId { get; set; }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BookMyShowApp
+namespace BookMyShow.Application
 {
-    class SeatType
+    public class SeatType
     {
         public int ID { get; set; }
         public string Type { get; set; }

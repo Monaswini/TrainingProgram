@@ -6,18 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200316055351_BookMyShowDatabase.cs" />
-    <Compile Remove="Migrations\20200316055351_BookMyShowDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20200319173155_SeatType table added.cs" />
-    <Compile Remove="Migrations\20200319173155_SeatType table added.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookMyShow.Application\BookMyShow.Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace BookMyShowApp
+namespace BookMyShow.Application
 {
-    class Movie
+   public class Movie
     {
         public int ID { get; set; }
         public string Name { get; set; }

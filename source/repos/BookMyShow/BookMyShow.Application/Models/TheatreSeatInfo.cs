@@ -1,6 +1,6 @@
-﻿namespace BookMyShowApp
+﻿namespace BookMyShow.Application
 {
-    class TheatreSeatInfo
+    public class TheatreSeatInfo
     {
         public int ID { get; set; }
         public int TheatreId { get; set; }
