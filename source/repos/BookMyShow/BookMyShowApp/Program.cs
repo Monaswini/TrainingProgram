@@ -40,7 +40,7 @@ namespace BookMyShowApp
                                 }
                             case "3":
                                 {
-                                    new AdminRole().ShowMoviesInTheatres();
+                                    ShowMoviesInTheatres();
                                     break;
                                 }
                             case "4":
@@ -58,7 +58,7 @@ namespace BookMyShowApp
                         Console.WriteLine("1. To Register");
                         Console.WriteLine("2. To Book ticket");
                         var choseOption = Console.ReadLine();
-                        switch(choseOption)
+                        switch (choseOption)
                         {
                             case "1":
                                 {
@@ -71,7 +71,6 @@ namespace BookMyShowApp
                                     break;
                                 }
                         }
-                        //new UserRole().UserDBOperation();
                         break;
                     }
                 default:
@@ -81,6 +80,15 @@ namespace BookMyShowApp
                     }
             }
         }
+
+        private static void ShowMoviesInTheatres()
+        {
+            var adminRole = new AdminRole();
+            var movieInTeatres = adminRole.ShowMoviesInTheatres();
+            foreach (var m in movieInTeatres)
+                Console.WriteLine(m.Movie.Name + " : " + m.Theatre.Name);
+        }
+
         private static void BookTicket()
         {
             var userRole = new UserRole();
@@ -88,8 +96,8 @@ namespace BookMyShowApp
             var name = Console.ReadLine();
             Console.WriteLine("Enter password");
             var password = Console.ReadLine();
-            var isValidUser = userRole.IsValidUser(name,password);
-            if(isValidUser)
+            var isValidUser = userRole.IsValidUser(name, password);
+            if (isValidUser)
             {
                 Console.WriteLine("Enter movie id from the below list");
                 var movies = userRole.GetMoviesList();
@@ -115,12 +123,12 @@ namespace BookMyShowApp
 
                 Console.WriteLine("Enter number of seats to book");
                 var numberOfSeat = Convert.ToInt32(Console.ReadLine());
-               
+
                 var availableSeatList = userRole.GetAvailableSeatList(choseMovieId, choseTheatreId, showTime, choseSeatTypeId);
                 Console.WriteLine("Displaying the available seats");
-                foreach(var seatNum in availableSeatList)
+                foreach (var seatNum in availableSeatList)
                 {
-                    Console.WriteLine(seatNum+" ");
+                    Console.WriteLine(seatNum + " ");
                 }
 
                 var bookedSeatDetails = new List<BookedSeatDetail>();
@@ -138,7 +146,7 @@ namespace BookMyShowApp
                 Console.WriteLine("Ticket booked");
                 return;
             }
-                Console.WriteLine("Not a valid user");
+            Console.WriteLine("Not a valid user");
         }
 
         private static void Register()

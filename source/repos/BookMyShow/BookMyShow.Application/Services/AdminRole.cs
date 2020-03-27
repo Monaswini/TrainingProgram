@@ -16,19 +16,17 @@ namespace BookMyShow.Application
             context.SaveChanges();
         }
 
-        public void ShowMoviesInTheatres()
+        public List<MovieTheatreInfo> ShowMoviesInTheatres()
         {
             var movieTheatreInfo = context.MovieTheatreInfo.Include(m => m.Movie)
                 .Include(x => x.Theatre).ToList();
-            foreach (var m in movieTheatreInfo)
-                Console.WriteLine(m.Movie.Name + " : " + m.Theatre.Name);
+            return movieTheatreInfo;
         }
 
         public void RemoveMovie(Movie movieTobeDeleted)
         {
             context.Movie.Remove(movieTobeDeleted);
             context.SaveChanges();
-            Console.WriteLine("Movie removed");
         }
 
         public void AddMovie(Genre genre, string movieName, List<Theatre> choseTheatreslist)
@@ -67,7 +65,7 @@ namespace BookMyShow.Application
         {
             var movieData = new MovieData();
             movieData.Genres = context.Genre.ToList();
-            movieData.Theatres= context.Theatre.ToList();
+            movieData.Theatres = context.Theatre.ToList();
             return movieData;
         }
     }

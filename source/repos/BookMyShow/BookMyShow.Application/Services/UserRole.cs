@@ -26,7 +26,7 @@ namespace BookMyShow.Application
             booking.ShowTime = (ShowTime)showTime;
             booking.NumberOfBookedSeat = numberOfSeat;
             booking.SeatTypeId = choseSeatTypeId;
-            var seatPrice = context.TheatreSeatInfo.FirstOrDefault(t => t.TheatreId == choseTheatreId && t.SeatTypeId== choseSeatTypeId).Price;
+            var seatPrice = context.TheatreSeatInfo.FirstOrDefault(t => t.TheatreId == choseTheatreId && t.SeatTypeId == choseSeatTypeId).Price;
             booking.TotalBookingPrice = seatPrice * numberOfSeat;
             booking.BookingDate = DateTime.Today;
             booking.BookedSeatList = bookedSeatDetails;
