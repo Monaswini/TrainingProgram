@@ -10,8 +10,23 @@ namespace BookMyShow.Application
     public class UserRole
     {
         BookMyShowContext context = new BookMyShowContext();
-        public void Register(User user)
+        public void Register(string name, string password, string email, DateTime dob, string phone, string gender, bool role, string city, string state, int pincode)
         {
+            User user = new User();
+            Address address = new Address();
+            address.City = city;
+            address.State = state;
+            address.PinCode = pincode;
+
+            user.Name = name;
+            user.Password = password;
+            user.Email = email;
+            user.DOB = dob;
+            user.Phone = phone;
+            user.Gender = gender;
+            user.IsUser = role;
+            user.Address = address;
+            
             context.User.Add(user);
             context.SaveChanges();
         }

@@ -152,8 +152,6 @@ namespace BookMyShowApp
         private static void Register()
         {
             var userRole = new UserRole();
-            User user = new User();
-            Address address = new Address();
             Console.WriteLine("Enter name");
             var name = Console.ReadLine();
             Console.WriteLine("Enter password");
@@ -180,20 +178,8 @@ namespace BookMyShowApp
             var state = Console.ReadLine();
             Console.WriteLine("Enter pincode");
             var pincode = Convert.ToInt32(Console.ReadLine());
-
-            address.City = city;
-            address.State = state;
-            address.PinCode = pincode;
-
-            user.Name = name;
-            user.Password = password;
-            user.Email = email;
-            user.DOB = dob;
-            user.Phone = phone;
-            user.Gender = gender;
-            user.IsUser = role;
-            user.Address = address;
-            userRole.Register(user);
+            
+            userRole.Register(name, password, email, dob, phone, gender, role, city, state, pincode);
         }
 
         private static void ChangeTicketPrice()
